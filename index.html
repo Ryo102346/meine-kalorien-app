@@ -1,5 +1,78 @@
 <!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Meine Kalorien-App</title><style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f1f5ff;color:#20304b}header{background:linear-gradient(110deg,#1689f8,#8753e8);color:#fff;padding:26px 18px}header h1{margin:0 0 6px}main{max-width:1150px;margin:auto;padding:16px}.card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 4px 20px #182c4b0d}h2{font-size:20px;margin:0 0 14px}h3{margin:12px 0}.columns{display:grid;grid-template-columns:1fr 1fr;gap:16px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{padding:15px;border-radius:14px;background:#ffece6}.stat:nth-child(2){background:#e4f0ff}.stat:nth-child(3){background:#fff3d8}.stat:nth-child(4){background:#e4f7ec}.stat strong{display:block;font-size:24px;margin:9px 0}.bar{background:#ffffffb0;height:9px;border-radius:8px;overflow:hidden;margin-top:10px}.bar span{display:block;height:100%;background:#fa6d50}.stat:nth-child(2) .bar span{background:#2676f5}.stat:nth-child(3) .bar span{background:#e9a900}.stat:nth-child(4) .bar span{background:#22b66d}input,select{width:100%;padding:11px;border:1px solid #d5dfed;border-radius:10px;font-size:15px}label{display:block;font-size:13px;font-weight:bold;margin:8px 0}label input,label select{margin-top:5px}button{background:#2676f5;color:#fff;border:0;padding:10px 13px;border-radius:10px;cursor:pointer;font-size:14px}button:hover{filter:brightness(.95)}.soft{background:#e9eef8;color:#253750}.purple{background:#8054e8}.danger{background:#ffe6eb;color:#b92345}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.between{justify-content:space-between}.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.food-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-height:380px;overflow:auto}.food-button{text-align:left;background:#f1f5fc;color:#213a60;border:2px solid transparent;padding:12px}.food-button.active{background:#e6f0ff;border-color:#2676f5}.food-button small{display:block;margin-top:5px;color:#697c97}.entry{border-bottom:1px solid #e6edf6;padding:12px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}.entry small{display:block;color:#64748b;margin-top:5px;line-height:1.5}.muted{color:#64748b;font-size:13px}.hidden{display:none!important}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.notice{background:#eaf4ff;padding:12px;border-radius:11px;margin:12px 0}.meal-card{border:1px solid #e0e7f4;border-radius:13px;padding:13px;margin:9px 0}.meal-card strong{display:block}.meal-card small{display:block;color:#64748b;margin:6px 0;line-height:1.5}.meal-card .actions{margin-top:8px}.ingredient{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #edf1f7}.ingredient small{color:#64748b}.full{grid-column:1/-1}@media(max-width:800px){.columns{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:390px){.food-grid{grid-template-columns:1fr}}
+
+/* Automatischer Dunkelmodus */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #101827;
+    color: #f1f5f9;
+  }
+
+  .card {
+    background: #1e293b;
+    color: #f1f5f9;
+    box-shadow: none;
+  }
+
+  .stat {
+    background: #273449;
+    color: #f1f5f9;
+  }
+
+  .stat:nth-child(2) {
+    background: #1c3655;
+  }
+
+  .stat:nth-child(3) {
+    background: #42351e;
+  }
+
+  .stat:nth-child(4) {
+    background: #1b4037;
+  }
+
+  input, select {
+    background: #334155;
+    color: white;
+    border-color: #475569;
+  }
+
+  .food-button {
+    background: #334155;
+    color: white;
+  }
+
+  .food-button.active {
+    background: #1e40af;
+    border-color: #60a5fa;
+  }
+
+  .food-button small,
+  .muted,
+  .entry small {
+    color: #cbd5e1;
+  }
+
+  .entry {
+    border-color: #475569;
+  }
+
+  .notice {
+    background: #243b55;
+    color: white;
+  }
+
+  .soft {
+    background: #475569;
+    color: white;
+  }
+
+  .quick {
+    background: #433875;
+    color: white;
+  }
+}
+
 </style></head><body><header><h1>🥗 Meine Kalorien-App</h1><p>Lebensmittel, eigene Mahlzeiten und Tagesbilanz</p></header><main>
 <section class="card"><div class="row between"><h2>Meine Tagesziele</h2><button id="showGoals" class="purple">Ziele ändern</button></div><p id="goalSummary" class="muted"></p><form id="goalsForm" class="hidden"><div class="fields"><label>Kalorien<input id="goalKcal" type="number" min="1" required></label><label>Protein (g)<input id="goalProtein" type="number" min="1" required></label><label>Fett (g)<input id="goalFat" type="number" min="1" required></label><label>Kohlenhydrate (g)<input id="goalCarbs" type="number" min="1" required></label></div><div class="actions"><button>Speichern</button><button type="button" id="cancelGoals" class="soft">Abbrechen</button></div></form></section>
 <section class="card"><h2>Meine Tagesbilanz</h2><div class="stats"><div class="stat">Kalorien<strong id="totalKcal">0</strong><small id="labelKcal"></small><div class="bar"><span id="barKcal"></span></div></div><div class="stat">Protein<strong id="totalProtein">0 g</strong><small id="labelProtein"></small><div class="bar"><span id="barProtein"></span></div></div><div class="stat">Fett<strong id="totalFat">0 g</strong><small id="labelFat"></small><div class="bar"><span id="barFat"></span></div></div><div class="stat">Kohlenhydrate<strong id="totalCarbs">0 g</strong><small id="labelCarbs"></small><div class="bar"><span id="barCarbs"></span></div></div></div><p id="remaining" class="muted"></p></section>
