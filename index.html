@@ -7,95 +7,89 @@
 <title>Meine Kalorien-App</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#111318;color:#fff}
-header{background:#20242d;color:#fff;padding:26px 18px}
-header h1{margin:0 0 6px}
-main{max-width:1150px;margin:auto;padding:16px}
-.card{border-radius:18px;padding:20px;margin-bottom:16px;color:#fff}
+body{margin:0;font-family:Arial,sans-serif;background:#111318;color:white}
+header{background:#20242d;padding:25px 18px}
+header h1{margin:0 0 8px}
+main{max-width:1100px;margin:auto;padding:15px}
+.card{padding:19px;border-radius:17px;margin-bottom:15px;color:white}
 h2{font-size:20px;margin:0 0 14px}
-h3{margin:12px 0}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.stat{padding:15px;border-radius:14px;background:#ffece6;color:#20304b}
-.stat:nth-child(2){background:#e4f0ff}
-.stat:nth-child(3){background:#fff3d8}
-.stat:nth-child(4){background:#e4f7ec}
-.stat strong{display:block;font-size:24px;margin:9px 0}
-.bar{background:#ffffffb0;height:9px;border-radius:8px;overflow:hidden;margin-top:10px}
-.bar span{display:block;height:100%;background:#fa6d50}
-.stat:nth-child(2) .bar span{background:#2676f5}
-.stat:nth-child(3) .bar span{background:#e9a900}
-.stat:nth-child(4) .bar span{background:#22b66d}
-input,select{width:100%;padding:11px;border:1px solid #64748b;border-radius:10px;font-size:15px;background:#263244;color:#fff}
+h3{font-size:17px}
+p{line-height:1.5}
+.muted,small{color:#e2e8f0;font-size:13px}
+.hidden{display:none!important}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.between{justify-content:space-between}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.full{grid-column:1/-1}
+label{display:block;font-size:13px;margin:8px 0;font-weight:bold}
+input,select{
+width:100%;padding:12px;margin-top:5px;
+border:1px solid #64748b;border-radius:10px;
+background:#263244;color:white;font-size:16px
+}
 input::placeholder{color:#cbd5e1}
-label{display:block;font-size:13px;font-weight:bold;margin:8px 0}
-label input,label select{margin-top:5px}
-button{background:#2676f5;color:#fff;border:0;padding:10px 13px;border-radius:10px;cursor:pointer;font-size:14px}
-button:disabled{opacity:.35;cursor:not-allowed}
+button{
+background:#2676f5;color:white;border:0;
+padding:11px 14px;border-radius:10px;
+font-size:14px;cursor:pointer
+}
+button:disabled{opacity:.4}
 .soft{background:#dbe5f4;color:#1e293b}
 .purple{background:#8054e8}
 .danger{background:#ffe0e5;color:#9f1239}
-.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.between{justify-content:space-between}
-.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.food-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-height:380px;overflow:auto}
-.food-button{text-align:left;background:#30394c;color:#fff;border:2px solid transparent;padding:12px}
+.notice{padding:12px;border-radius:11px;background:#ffffff20;margin:12px 0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.stat{background:#ffece6;color:#20304b;padding:13px;border-radius:13px}
+.stat:nth-child(2){background:#e4f0ff}
+.stat:nth-child(3){background:#fff3d8}
+.stat:nth-child(4){background:#e4f7ec}
+.stat strong{display:block;font-size:23px;margin:9px 0;overflow-wrap:anywhere}
+.stat small{color:#334155}
+.bar{background:#ffffffaa;height:9px;border-radius:8px;overflow:hidden;margin-top:10px}
+.bar span{display:block;height:100%;background:#fa6d50;width:0}
+.stat:nth-child(2) .bar span{background:#2676f5}
+.stat:nth-child(3) .bar span{background:#e9a900}
+.stat:nth-child(4) .bar span{background:#22b66d}
+.date-nav{display:flex;align-items:center;gap:8px;background:#ffffff20;padding:10px;border-radius:13px;margin-bottom:14px}
+.date-nav button{background:white;color:#20304b;font-size:24px;min-width:44px}
+.date-center{flex:1;text-align:center}
+.date-center strong{display:block}
+.date-center small{display:block;margin-top:5px}
+.entry,.ingredient{
+display:flex;justify-content:space-between;align-items:center;
+gap:10px;padding:12px 0;border-bottom:1px solid #ffffff40
+}
+.entry small,.ingredient small{display:block;margin-top:5px;line-height:1.5}
+.meal-card,.online-result{
+border:1px solid #ffffff55;border-radius:13px;
+padding:13px;margin:10px 0;background:#ffffff10
+}
+.meal-card strong,.online-result strong{display:block}
+.meal-card small,.online-result small{display:block;margin:7px 0;line-height:1.5}
+.food-grid{
+display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+gap:8px;max-height:380px;overflow:auto
+}
+.food-button{
+background:#30394c;text-align:left;
+border:2px solid transparent;padding:12px
+}
 .food-button.active{background:#234e8c;border-color:#93c5fd}
-.food-button small{display:block;margin-top:5px;color:#e2e8f0}
-.entry{border-bottom:1px solid #ffffff40;padding:12px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}
-.entry small{display:block;color:#e2e8f0;margin-top:5px;line-height:1.5}
-.muted{color:#e2e8f0;font-size:13px}
-.hidden{display:none!important}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.notice{background:#ffffff20;padding:12px;border-radius:11px;margin:12px 0;color:#fff}
-.meal-card{border:1px solid #ffffff40;border-radius:13px;padding:13px;margin:9px 0}
-.meal-card strong{display:block}
-.meal-card small{display:block;color:#e2e8f0;margin:6px 0;line-height:1.5}
-.ingredient{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #ffffff40}
-.ingredient small{color:#e2e8f0}
-.full{grid-column:1/-1}
-
-/* Datumsauswahl */
-.date-nav{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:8px;
-background:#ffffff1c;
-padding:10px;
-border-radius:14px;
-margin:0 0 16px
-}
-.date-nav button{
-min-width:43px;
-height:43px;
-padding:8px;
-font-size:22px;
-background:#ffffff;
-color:#20304b
-}
-.date-center{text-align:center;flex:1}
-.date-center strong{display:block;font-size:15px}
-.date-center small{display:block;margin-top:5px;color:#e2e8f0}
-.today-button{margin-bottom:14px}
-.history-note{font-size:12px;color:#e2e8f0;line-height:1.5}
-
-/* Feste Abschnittsfarben */
+.food-button small{display:block;margin-top:5px}
 #bereich-ziele{background:#173d78}
 #bereich-bilanz{background:#19543b}
 #bereich-eintraege{background:#665414}
 #bereich-mahlzeiten,#mealEditor{background:#754018}
 #bereich-lebensmittel,#selectionCard{background:#493074}
 #bereich-eigene{background:#702d38}
+#bereich-online{background:#234f65}
+#bereich-manuell{background:#4b416f}
 #bereich-schnellwahl{background:#175c61}
 #bereich-backup{background:#58402f}
 #bereich-reset{background:#30343d}
-
-@media(max-width:800px){
-.stats{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:390px){
-.food-grid{grid-template-columns:1fr}
-}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:390px){.food-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -107,7 +101,6 @@ color:#20304b
 
 <main>
 
-<!-- 1. TAGESZIELE -->
 <section class="card" id="bereich-ziele">
 <div class="row between">
 <h2>Meine Tagesziele</h2>
@@ -116,18 +109,10 @@ color:#20304b
 <p id="goalSummary" class="muted"></p>
 <form id="goalsForm" class="hidden">
 <div class="fields">
-<label>Kalorien
-<input id="goalKcal" type="number" min="1" required>
-</label>
-<label>Protein (g)
-<input id="goalProtein" type="number" min="1" required>
-</label>
-<label>Fett (g)
-<input id="goalFat" type="number" min="1" required>
-</label>
-<label>Kohlenhydrate (g)
-<input id="goalCarbs" type="number" min="1" required>
-</label>
+<label>Kalorien<input id="goalKcal" type="number" min="1" required></label>
+<label>Protein (g)<input id="goalProtein" type="number" min="1" required></label>
+<label>Fett (g)<input id="goalFat" type="number" min="1" required></label>
+<label>Kohlenhydrate (g)<input id="goalCarbs" type="number" min="1" required></label>
 </div>
 <div class="actions">
 <button>Speichern</button>
@@ -136,10 +121,8 @@ color:#20304b
 </form>
 </section>
 
-<!-- 2. TAGESBILANZ -->
 <section class="card" id="bereich-bilanz">
 <h2>Meine Tagesbilanz</h2>
-
 <div class="date-nav">
 <button id="previousDay" aria-label="Vorheriger Tag">‹</button>
 <div class="date-center">
@@ -148,52 +131,22 @@ color:#20304b
 </div>
 <button id="nextDay" aria-label="Nächster Tag">›</button>
 </div>
-
-<button id="jumpToday" class="soft today-button hidden">
-Zurück zu heute
-</button>
-
-<div class="stats">
-<div class="stat">
-Kalorien
-<strong id="totalKcal">0</strong>
-<small id="labelKcal"></small>
-<div class="bar"><span id="barKcal"></span></div>
+<button id="jumpToday" class="soft hidden">Zurück zu heute</button>
+<div class="stats" style="margin-top:12px">
+<div class="stat">Kalorien<strong id="totalKcal">0</strong><small id="labelKcal"></small><div class="bar"><span id="barKcal"></span></div></div>
+<div class="stat">Protein<strong id="totalProtein">0 g</strong><small id="labelProtein"></small><div class="bar"><span id="barProtein"></span></div></div>
+<div class="stat">Fett<strong id="totalFat">0 g</strong><small id="labelFat"></small><div class="bar"><span id="barFat"></span></div></div>
+<div class="stat">Kohlenhydrate<strong id="totalCarbs">0 g</strong><small id="labelCarbs"></small><div class="bar"><span id="barCarbs"></span></div></div>
 </div>
-<div class="stat">
-Protein
-<strong id="totalProtein">0 g</strong>
-<small id="labelProtein"></small>
-<div class="bar"><span id="barProtein"></span></div>
-</div>
-<div class="stat">
-Fett
-<strong id="totalFat">0 g</strong>
-<small id="labelFat"></small>
-<div class="bar"><span id="barFat"></span></div>
-</div>
-<div class="stat">
-Kohlenhydrate
-<strong id="totalCarbs">0 g</strong>
-<small id="labelCarbs"></small>
-<div class="bar"><span id="barCarbs"></span></div>
-</div>
-</div>
-
 <p id="remaining" class="muted"></p>
-<p class="history-note">
-Mit den Pfeilen kannst du frühere Tage ansehen.
-Die Einträge bleiben gespeichert, auch wenn ein neuer Tag beginnt.
-</p>
+<p class="muted">Mit den Pfeilen kannst du frühere Tage ansehen. Deine Einträge werden beim Tageswechsel nicht gelöscht.</p>
 </section>
 
-<!-- 3. EINTRÄGE -->
 <section class="card" id="bereich-eintraege">
 <h2 id="entriesHeading">Heutige Einträge</h2>
 <div id="entries"></div>
 </section>
 
-<!-- 4. MAHLZEITEN -->
 <section class="card" id="bereich-mahlzeiten">
 <div class="row between">
 <h2>Meine gespeicherten Mahlzeiten</h2>
@@ -207,10 +160,7 @@ Die Einträge bleiben gespeichert, auch wenn ein neuer Tag beginnt.
 <label>Name der Mahlzeit
 <input id="mealName" placeholder="z. B. Skyr Mix Light">
 </label>
-<p class="muted">
-Wähle Lebensmittel aus der Liste und tippe auf
-„+ Zur Mahlzeit“.
-</p>
+<p class="muted">Wähle Lebensmittel aus der Liste und tippe auf „+ Zur Mahlzeit“.</p>
 <div id="ingredientList"></div>
 <div id="mealTotals" class="notice"></div>
 <div class="actions">
@@ -219,14 +169,10 @@ Wähle Lebensmittel aus der Liste und tippe auf
 </div>
 </section>
 
-<!-- 5. LEBENSMITTEL -->
 <section class="card" id="bereich-lebensmittel">
 <h2>Lebensmittel auswählen</h2>
 <input id="search" type="search" placeholder="Skyr, Ei, Tomate ...">
-<p class="muted">
-Lebensmittel antippen, Menge wählen und hinzufügen.
-Neue Einträge werden immer für heute gespeichert.
-</p>
+<p class="muted">Gespeichertes Lebensmittel antippen, Menge wählen und zu heute oder zu einer Mahlzeit hinzufügen.</p>
 <div id="foodButtons" class="food-grid"></div>
 <p id="foodCount" class="muted"></p>
 </section>
@@ -259,15 +205,12 @@ Neue Einträge werden immer für heute gespeichert.
 </div>
 </section>
 
-<!-- 6. EIGENE LEBENSMITTEL -->
 <section class="card" id="bereich-eigene">
 <div class="row between">
 <h2>Eigene Lebensmittel</h2>
 <button id="newFood" class="purple">+ Neu</button>
 </div>
-<p class="muted">
-Neue Lebensmittel speichern oder vorhandene Nährwerte bearbeiten.
-</p>
+<p class="muted">Lebensmittel selbst erfassen oder vorhandene Nährwerte bearbeiten.</p>
 <form id="foodForm" class="hidden">
 <div class="fields">
 <label class="full">Lebensmittelname
@@ -285,65 +228,111 @@ Neue Lebensmittel speichern oder vorhandene Nährwerte bearbeiten.
 <label>Kohlenhydrate / 100 g
 <input id="foodCarbs" type="number" min="0" step="any" required>
 </label>
-<label>Optional: Gramm pro Stück
+<label>Gramm pro Stück (optional)
 <input id="foodPiece" type="number" min="0.1" step="any">
 </label>
 </div>
 <div class="actions">
 <button>Lebensmittel speichern</button>
 <button type="button" id="cancelFood" class="soft">Abbrechen</button>
-<button type="button" id="deleteFood" class="danger hidden">
-Lebensmittel löschen
-</button>
+<button type="button" id="deleteFood" class="danger hidden">Lebensmittel löschen</button>
 </div>
 </form>
 </section>
 
-<!-- 7. SCHNELLAUSWAHL -->
+<section class="card" id="bereich-online">
+<h2>🌐 Lebensmittel online suchen</h2>
+<p class="muted">Suche in Open Food Facts nach einem Produkt und übernimm seine Nährwerte pro 100 g. Prüfe die Angaben vor dem Speichern.</p>
+<form id="onlineForm">
+<label>Lebensmittel oder Produkt
+<input id="onlineQuery" type="search" placeholder="z. B. Reis, Skyr, Haferflocken" required>
+</label>
+<button id="onlineSearchButton">Online suchen</button>
+</form>
+<p id="onlineStatus" class="muted" role="status"></p>
+<div id="onlineResults"></div>
+<div id="onlineEdit" class="hidden">
+<h3>Gefundenes Lebensmittel prüfen</h3>
+<p class="muted">Alle Werte beziehen sich auf 100 g. Fehlende Angaben musst du ergänzen.</p>
+<div class="fields">
+<label class="full">Name
+<input id="onlineName">
+</label>
+<label>Kalorien / 100 g
+<input id="onlineKcal" type="number" min="0" step="any">
+</label>
+<label>Protein / 100 g
+<input id="onlineProtein" type="number" min="0" step="any">
+</label>
+<label>Fett / 100 g
+<input id="onlineFat" type="number" min="0" step="any">
+</label>
+<label>Kohlenhydrate / 100 g
+<input id="onlineCarbs" type="number" min="0" step="any">
+</label>
+</div>
+<div class="actions">
+<button id="onlineSave">In meine Lebensmittel speichern</button>
+<button id="onlineCancel" class="soft">Abbrechen</button>
+</div>
+</div>
+</section>
+
+<section class="card" id="bereich-manuell">
+<h2>➕ Kalorien und Makros manuell hinzufügen</h2>
+<p class="muted">Du kannst einzelne Werte oder mehrere gleichzeitig eingeben. Leere Felder zählen als 0. Alles wird zu deiner heutigen Bilanz addiert.</p>
+<form id="manualForm">
+<div class="fields">
+<label class="full">Bezeichnung (optional)
+<input id="manualName" placeholder="z. B. Geschätzte Mahlzeit">
+</label>
+<label>Kalorien (kcal)
+<input id="manualKcal" type="number" min="0" step="any" placeholder="0">
+</label>
+<label>Protein (g)
+<input id="manualProtein" type="number" min="0" step="any" placeholder="0">
+</label>
+<label>Fett (g)
+<input id="manualFat" type="number" min="0" step="any" placeholder="0">
+</label>
+<label>Kohlenhydrate (g)
+<input id="manualCarbs" type="number" min="0" step="any" placeholder="0">
+</label>
+</div>
+<div class="actions">
+<button>Zur heutigen Bilanz hinzufügen</button>
+</div>
+</form>
+</section>
+
 <section class="card" id="bereich-schnellwahl">
 <h2>Meine Schnellauswahl</h2>
 <div id="quickButtons" class="row"></div>
 </section>
 
-<!-- 8. DATENSICHERUNG -->
 <section class="card" id="bereich-backup">
 <h2>Datensicherung</h2>
-<p class="muted">
-Sichere deine Lebensmittel, Mahlzeiten, Tagesziele
-und sämtliche bisherigen Tage.
-</p>
+<p class="muted">Sichere Lebensmittel, Mahlzeiten, Tagesziele und alle bisherigen Einträge.</p>
 <div class="actions">
 <button id="exportData" class="soft">Backup herunterladen</button>
 <button id="importData" class="soft">Backup importieren</button>
-<input id="importFile" class="hidden" type="file"
-accept=".json,application/json">
+<input id="importFile" type="file" accept=".json,application/json" class="hidden">
 </div>
 </section>
 
-<!-- 9. MANUELLES ZURÜCKSETZEN -->
 <section class="card" id="bereich-reset">
 <h2>Aktuelle Tagesbilanz zurücksetzen</h2>
-<p class="muted">
-Nur die Einträge des heutigen Tages werden gelöscht.
-Frühere Tage, Lebensmittel und gespeicherte Mahlzeiten
-bleiben erhalten.
-</p>
-<button id="clearDay" class="danger">
-Heutige Tagesbilanz zurücksetzen
-</button>
+<p class="muted">Nur die heutigen Einträge werden nach Bestätigung gelöscht. Frühere Tage und gespeicherte Lebensmittel bleiben erhalten.</p>
+<button id="clearDay" class="danger">Heutige Tagesbilanz zurücksetzen</button>
 </section>
 
-<p class="muted">
-Nährwerte und Stückgewichte sind Richtwerte.
-Die Angaben auf der Verpackung sind genauer.
-</p>
-
+<p class="muted">Nährwerte und Stückgewichte sind Richtwerte. Produktverpackungen sind bei Abweichungen massgebend.</p>
 </main>
 
 <script>
 "use strict";
 
-/* Bestehende Speicherkennungen beibehalten */
+/* Bisherige Speicherkennungen */
 const FOOD_KEY="meine_foods_v2";
 const ENTRY_KEY="meine_entries_v2";
 const GOAL_KEY="meine_ziele";
@@ -352,9 +341,7 @@ const MEAL_KEY="meine_mahlzeiten_v1";
 
 const $=id=>document.getElementById(id);
 const num=v=>Number(v)||0;
-const fmt=v=>num(v).toLocaleString("de-CH",{
-maximumFractionDigits:1
-});
+const fmt=v=>num(v).toLocaleString("de-CH",{maximumFractionDigits:1});
 
 function uid(){
 return typeof crypto!=="undefined"&&crypto.randomUUID
@@ -362,25 +349,22 @@ return typeof crypto!=="undefined"&&crypto.randomUUID
 :Date.now().toString(36)+Math.random().toString(36).slice(2);
 }
 
-/* Lokales Kalenderdatum */
 function dateKey(d){
 return d.getFullYear()+"-"+
 String(d.getMonth()+1).padStart(2,"0")+"-"+
 String(d.getDate()).padStart(2,"0");
 }
 
-function day(){
-return dateKey(new Date());
-}
+function day(){return dateKey(new Date())}
 
 function dateFromKey(key){
 const p=key.split("-").map(Number);
-return new Date(p[0],p[1]-1,p[2],12,0,0);
+return new Date(p[0],p[1]-1,p[2],12);
 }
 
-function changeDate(key,days){
+function changeDate(key,n){
 const d=dateFromKey(key);
-d.setDate(d.getDate()+days);
+d.setDate(d.getDate()+n);
 return dateKey(d);
 }
 
@@ -394,12 +378,9 @@ function load(key,fallback){
 try{
 const v=JSON.parse(localStorage.getItem(key));
 return v===null?fallback:v;
-}catch{
-return fallback;
-}
+}catch{return fallback}
 }
 
-/* Standardlebensmittel */
 const rawFoods=[
 ["skyr","Skyr Nature",64,11,.2,4],
 ["quark","Magerquark",62,11,.2,4],
@@ -451,13 +432,8 @@ const rawFoods=[
 ];
 
 const defaults=rawFoods.map(f=>({
-id:f[0],
-name:f[1],
-kcal:f[2],
-protein:f[3],
-fat:f[4],
-carbs:f[5],
-piece:f[6]||null
+id:f[0],name:f[1],kcal:f[2],
+protein:f[3],fat:f[4],carbs:f[5],piece:f[6]||null
 }));
 
 let foods=load(FOOD_KEY,[]);
@@ -474,9 +450,7 @@ if(!rawGoals||typeof rawGoals!=="object")rawGoals={};
 
 function mergeDefaults(){
 for(const f of defaults){
-if(!foods.some(x=>x.id===f.id)){
-foods.push({...f});
-}
+if(!foods.some(x=>x.id===f.id))foods.push({...f});
 }
 }
 mergeDefaults();
@@ -489,12 +463,10 @@ carbs:num(rawGoals.carbs??rawGoals.kh)||180
 };
 
 let selected=null;
+let selectedDay=day();
 let editingFood=null;
 let editingMeal=null;
 let draftIngredients=[];
-
-/* NEU: ausgewählter Kalendertag */
-let selectedDay=day();
 
 function save(){
 try{
@@ -518,21 +490,19 @@ return b;
 }
 
 function nutrients(food,grams){
-const factor=grams/100;
+const x=grams/100;
 return {
-kcal:num(food.kcal)*factor,
-protein:num(food.protein)*factor,
-fat:num(food.fat)*factor,
-carbs:num(food.carbs)*factor
+kcal:num(food.kcal)*x,
+protein:num(food.protein)*x,
+fat:num(food.fat)*x,
+carbs:num(food.carbs)*x
 };
 }
 
 function sumItems(items){
 const t={kcal:0,protein:0,fat:0,carbs:0};
 for(const item of items){
-for(const k of Object.keys(t)){
-t[k]+=num(item[k]);
-}
+for(const k of Object.keys(t))t[k]+=num(item[k]);
 }
 return t;
 }
@@ -541,25 +511,16 @@ function describe(t){
 return `${fmt(t.kcal)} kcal · P ${fmt(t.protein)} g · F ${fmt(t.fat)} g · KH ${fmt(t.carbs)} g`;
 }
 
-/* Datumsauswahl */
 function renderDate(){
 const today=day();
-
 $("selectedDateLabel").textContent=dateText(selectedDay);
 $("selectedDateInfo").textContent=
 selectedDay===today?"Heute":"Gespeicherter Tagesverlauf";
-
 $("nextDay").disabled=selectedDay>=today;
-
-$("jumpToday").classList.toggle(
-"hidden",selectedDay===today
-);
-
-$("entriesHeading").textContent=
-selectedDay===today
+$("jumpToday").classList.toggle("hidden",selectedDay===today);
+$("entriesHeading").textContent=selectedDay===today
 ?"Heutige Einträge"
 :"Einträge vom "+dateFromKey(selectedDay).toLocaleDateString("de-CH");
-
 }
 
 function selectDay(key){
@@ -570,38 +531,26 @@ renderTotals();
 renderEntries();
 }
 
-$("previousDay").onclick=()=>{
-selectDay(changeDate(selectedDay,-1));
-};
+$("previousDay").onclick=()=>selectDay(changeDate(selectedDay,-1));
+$("nextDay").onclick=()=>selectDay(changeDate(selectedDay,1));
+$("jumpToday").onclick=()=>selectDay(day());
 
-$("nextDay").onclick=()=>{
-selectDay(changeDate(selectedDay,1));
-};
-
-$("jumpToday").onclick=()=>{
-selectDay(day());
-};
-
-/* Lebensmittel */
 function renderFoods(){
 const q=$("search").value.toLocaleLowerCase("de").trim();
 const list=$("foodButtons");
 list.replaceChildren();
 
-const found=foods
-.filter(f=>f.name.toLocaleLowerCase("de").includes(q))
-.sort((a,b)=>a.name.localeCompare(b.name,"de"));
+const found=foods.filter(f=>
+f.name.toLocaleLowerCase("de").includes(q)
+).sort((a,b)=>a.name.localeCompare(b.name,"de"));
 
 for(const f of found){
 const b=button("",()=>selectFood(f.id),
 "food-button"+(selected===f.id?" active":""));
-
 const name=document.createElement("strong");
 const small=document.createElement("small");
-
 name.textContent=f.name;
 small.textContent=fmt(f.kcal)+" kcal / 100 g";
-
 b.append(name,small);
 list.append(b);
 }
@@ -613,50 +562,36 @@ $("foodCount").textContent=
 function selectFood(id){
 const f=foods.find(x=>x.id===id);
 if(!f)return;
-
 selected=id;
 $("selectionCard").classList.remove("hidden");
 $("selectedName").textContent=f.name;
 $("selectedValues").textContent="Pro 100 g: "+describe(f);
 
 const piece=weights[id]??f.piece;
-
 $("unit").replaceChildren();
 $("unit").add(new Option("Gramm","g"));
-
-if(piece){
-$("unit").add(new Option("Stück","piece"));
-}
-
+if(piece)$("unit").add(new Option("Stück","piece"));
 $("unit").value=piece?"piece":"g";
 $("amount").value=piece?1:100;
 $("pieceWeight").value=piece||"";
-
 updateSelection();
 renderFoods();
-
-$("selectionCard").scrollIntoView({
-behavior:"smooth",block:"nearest"
-});
+$("selectionCard").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 
 function selectionAmount(){
 const f=foods.find(x=>x.id===selected);
 if(!f)return null;
-
 const amount=Number($("amount").value);
 const piece=$("unit").value==="piece";
 const pw=Number($("pieceWeight").value);
 const grams=piece?amount*pw:amount;
 
 if(!Number.isFinite(grams)||grams<=0||
-(piece&&(!Number.isFinite(pw)||pw<=0))){
-return null;
-}
+(piece&&(!Number.isFinite(pw)||pw<=0)))return null;
 
 return {
-food:f,
-grams,
+food:f,grams,
 description:piece
 ?`${fmt(amount)} Stück (${fmt(grams)} g)`
 :`${fmt(grams)} g`,
@@ -665,12 +600,8 @@ pieceWeight:piece?pw:null
 }
 
 function updateSelection(){
-$("pieceSettings").classList.toggle(
-"hidden",$("unit").value!=="piece"
-);
-
+$("pieceSettings").classList.toggle("hidden",$("unit").value!=="piece");
 const a=selectionAmount();
-
 $("calculated").textContent=a
 ?`${fmt(a.grams)} g = ${describe(nutrients(a.food,a.grams))}`
 :"Bitte gültige Menge eingeben.";
@@ -678,12 +609,7 @@ $("calculated").textContent=a
 
 function getSelection(){
 const a=selectionAmount();
-
-if(!a){
-alert("Bitte gültige Menge eingeben.");
-return null;
-}
-
+if(!a){alert("Bitte gültige Menge eingeben.");return null}
 if(a.pieceWeight!==null){
 weights[a.food.id]=a.pieceWeight;
 save();
@@ -691,36 +617,21 @@ save();
 return a;
 }
 
-/* Einträge werden dauerhaft mit Datum gespeichert */
 function addEntry(name,grams,description,t){
 entries.push({
-id:uid(),
-date:day(),
-name,
-gramm:grams,
-description,
-...t
+id:uid(),date:day(),name,gramm:grams,description,...t
 });
-
-/* Nach neuem Eintrag wieder heute anzeigen */
 selectedDay=day();
-
 save();
 render();
 }
 
 function addFoodToDay(f,grams,description){
-addEntry(
-f.name,grams,description,
-nutrients(f,grams)
-);
+addEntry(f.name,grams,description,nutrients(f,grams));
 }
 
-/* Bilanz des ausgewählten Tages */
 function renderTotals(){
-const totals=sumItems(
-entries.filter(e=>e.date===selectedDay)
-);
+const totals=sumItems(entries.filter(e=>e.date===selectedDay));
 
 for(const [suffix,key,unit] of [
 ["Kcal","kcal","kcal"],
@@ -730,32 +641,24 @@ for(const [suffix,key,unit] of [
 ]){
 $("total"+suffix).textContent=
 fmt(totals[key])+(key==="kcal"?"":" g");
-
-$("label"+suffix).textContent=
-`von ${fmt(goals[key])} ${unit}`;
-
+$("label"+suffix).textContent=`von ${fmt(goals[key])} ${unit}`;
 $("bar"+suffix).style.width=
 Math.min(100,totals[key]/goals[key]*100)+"%";
 }
 
 const rest=goals.kcal-totals.kcal;
-
 $("remaining").textContent=rest>=0
 ?`Noch ${fmt(rest)} kcal bis zum Tagesziel`
-:`${fmt(-rest)} kcal über dem Tagesziel`;
+:`${fmt(-rest)} kcal über deinem Tagesziel`;
 
 $("goalSummary").textContent=
 `${fmt(goals.kcal)} kcal · Protein ${fmt(goals.protein)} g · Fett ${fmt(goals.fat)} g · Kohlenhydrate ${fmt(goals.carbs)} g`;
 }
 
-/* Einträge des ausgewählten Tages */
 function renderEntries(){
 const list=$("entries");
 list.replaceChildren();
-
-const current=entries.filter(
-e=>e.date===selectedDay
-);
+const current=entries.filter(e=>e.date===selectedDay);
 
 if(!current.length){
 const p=document.createElement("p");
@@ -769,63 +672,41 @@ const row=document.createElement("div");
 const info=document.createElement("div");
 const name=document.createElement("strong");
 const small=document.createElement("small");
-
 row.className="entry";
 
 name.textContent=e.name+
 (e.description?" · "+e.description:"");
-
 small.textContent=describe(e);
 info.append(name,small);
 
-/* Einzelne Einträge dürfen auch rückwirkend gelöscht werden */
-row.append(
-info,
-button("Entfernen",()=>{
-if(!confirm(
-`Eintrag „${e.name}“ vom ${dateText(selectedDay)} entfernen?`
-))return;
-
+row.append(info,button("Entfernen",()=>{
+if(!confirm(`Eintrag „${e.name}“ wirklich entfernen?`))return;
 entries=entries.filter(x=>x.id!==e.id);
 save();
 render();
-},"danger")
-);
-
+},"danger"));
 list.append(row);
 }
 }
 
-/* Schnellauswahl */
 function renderQuick(){
 const list=$("quickButtons");
 list.replaceChildren();
 
 for(const [id,grams] of [
-["skyr",485],
-["whey",13],
-["quark",250],
-["eiergekocht",60],
-["linsenwaffeln",8]
+["skyr",485],["whey",13],["quark",250],
+["eiergekocht",60],["linsenwaffeln",8]
 ]){
 const f=foods.find(x=>x.id===id);
-
 if(f){
-list.append(
-button(`${f.name} · ${grams} g`,
-()=>addFoodToDay(
-f,grams,fmt(grams)+" g"
-),"soft")
-);
+list.append(button(`${f.name} · ${grams} g`,
+()=>addFoodToDay(f,grams,fmt(grams)+" g"),"soft"));
 }
 }
 }
 
-/* Gespeicherte Mahlzeiten */
-function mealNutrition(meal){
-return sumItems(
-meal.ingredients.map(i=>nutrients(i,i.grams))
-);
+function mealNutrition(m){
+return sumItems(m.ingredients.map(i=>nutrients(i,i.grams)));
 }
 
 function renderMeals(){
@@ -835,8 +716,7 @@ list.replaceChildren();
 if(!meals.length){
 const p=document.createElement("p");
 p.className="muted";
-p.textContent=
-"Noch keine Mahlzeiten gespeichert. Klicke auf „+ Neue Mahlzeit“.";
+p.textContent="Noch keine Mahlzeiten gespeichert.";
 list.append(p);
 }
 
@@ -850,29 +730,19 @@ const actions=document.createElement("div");
 card.className="meal-card";
 name.textContent=m.name;
 small.textContent=describe(mealNutrition(m));
-
 ingredients.textContent=m.ingredients
-.map(i=>`${i.name} ${fmt(i.grams)} g`)
-.join(" · ");
-
+.map(i=>`${i.name} ${fmt(i.grams)} g`).join(" · ");
 actions.className="actions";
 
 actions.append(
 button("+ Zu heute",()=>{
 const t=mealNutrition(m);
-const grams=m.ingredients.reduce(
-(s,i)=>s+num(i.grams),0
-);
-
-addEntry(
-m.name,grams,
-`${m.ingredients.length} Zutaten`,t
-);
+const grams=m.ingredients.reduce((s,i)=>s+num(i.grams),0);
+addEntry(m.name,grams,`${m.ingredients.length} Zutaten`,t);
 }),
 button("Bearbeiten",()=>openMeal(m),"soft"),
 button("Löschen",()=>{
 if(!confirm(`Mahlzeit „${m.name}“ löschen?`))return;
-
 meals=meals.filter(x=>x.id!==m.id);
 save();
 render();
@@ -886,23 +756,13 @@ list.append(card);
 
 function openMeal(m=null){
 editingMeal=m?m.id:null;
-
-draftIngredients=m
-?m.ingredients.map(i=>({...i}))
-:[];
-
+draftIngredients=m?m.ingredients.map(i=>({...i})):[];
 $("mealName").value=m?.name||"";
-
-$("mealEditorTitle").textContent=m
-?"Mahlzeit bearbeiten"
-:"Neue Mahlzeit erstellen";
-
+$("mealEditorTitle").textContent=
+m?"Mahlzeit bearbeiten":"Neue Mahlzeit erstellen";
 $("mealEditor").classList.remove("hidden");
 renderDraft();
-
-$("mealEditor").scrollIntoView({
-behavior:"smooth",block:"nearest"
-});
+$("mealEditor").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 
 function renderDraft(){
@@ -912,8 +772,7 @@ list.replaceChildren();
 if(!draftIngredients.length){
 const p=document.createElement("p");
 p.className="muted";
-p.textContent=
-"Noch keine Zutaten. Wähle ein Lebensmittel aus der Liste.";
+p.textContent="Noch keine Zutaten hinzugefügt.";
 list.append(p);
 }
 
@@ -924,33 +783,23 @@ const strong=document.createElement("strong");
 const small=document.createElement("small");
 
 row.className="ingredient";
-
 strong.textContent=`${i.name} · ${fmt(i.grams)} g`;
 small.textContent=describe(nutrients(i,i.grams));
-
 details.append(strong,small);
 
-row.append(
-details,
-button("Entfernen",()=>{
+row.append(details,button("Entfernen",()=>{
 draftIngredients.splice(index,1);
 renderDraft();
-},"danger")
-);
-
+},"danger"));
 list.append(row);
 });
 
-$("mealTotals").textContent=
-"Mahlzeit gesamt: "+
-describe(sumItems(
-draftIngredients.map(i=>nutrients(i,i.grams))
-));
+$("mealTotals").textContent="Mahlzeit gesamt: "+
+describe(sumItems(draftIngredients.map(i=>nutrients(i,i.grams))));
 }
 
 function openFoodForm(f=null){
 editingFood=f?.id||null;
-
 $("foodForm").classList.remove("hidden");
 $("foodName").value=f?.name||"";
 
@@ -958,15 +807,9 @@ for(const k of ["Kcal","Protein","Fat","Carbs"]){
 $("food"+k).value=f?.[k.toLowerCase()]??"";
 }
 
-$("foodPiece").value=f
-?(weights[f.id]??f.piece??"")
-:"";
-
+$("foodPiece").value=f?(weights[f.id]??f.piece??""):"";
 $("deleteFood").classList.toggle("hidden",!f);
-
-$("foodForm").scrollIntoView({
-behavior:"smooth",block:"nearest"
-});
+$("foodForm").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 
 function render(){
@@ -978,31 +821,25 @@ renderQuick();
 renderMeals();
 }
 
-/* Bedienung */
+/* Lebensmittelbedienung */
 $("search").oninput=renderFoods;
 
 $("unit").onchange=()=>{
 $("amount").value=$("unit").value==="piece"?1:100;
 updateSelection();
 };
-
 $("amount").oninput=updateSelection;
 $("pieceWeight").oninput=updateSelection;
 
 $("addSelected").onclick=()=>{
 const a=getSelection();
-if(a){
-addFoodToDay(a.food,a.grams,a.description);
-}
+if(a)addFoodToDay(a.food,a.grams,a.description);
 };
 
 $("addIngredient").onclick=()=>{
 const a=getSelection();
 if(!a)return;
-
-if($("mealEditor").classList.contains("hidden")){
-openMeal();
-}
+if($("mealEditor").classList.contains("hidden"))openMeal();
 
 draftIngredients.push({
 name:a.food.name,
@@ -1014,12 +851,10 @@ carbs:num(a.food.carbs)
 });
 
 renderDraft();
-
-$("mealEditor").scrollIntoView({
-behavior:"smooth",block:"nearest"
-});
+$("mealEditor").scrollIntoView({behavior:"smooth",block:"nearest"});
 };
 
+/* Mahlzeitenbedienung */
 $("newMeal").onclick=()=>openMeal();
 
 $("cancelMeal").onclick=()=>{
@@ -1032,10 +867,9 @@ $("saveMeal").onclick=()=>{
 const name=$("mealName").value.trim();
 
 if(!name){
-alert("Bitte der Mahlzeit einen Namen geben.");
+alert("Bitte einen Namen eingeben.");
 return;
 }
-
 if(!draftIngredients.length){
 alert("Bitte mindestens eine Zutat hinzufügen.");
 return;
@@ -1056,11 +890,11 @@ meals.push(m);
 $("mealEditor").classList.add("hidden");
 editingMeal=null;
 draftIngredients=[];
-
 save();
 render();
 };
 
+/* Eigene Lebensmittel */
 $("editSelected").onclick=()=>{
 const f=foods.find(x=>x.id===selected);
 if(f)openFoodForm(f);
@@ -1084,8 +918,7 @@ fat:Number($("foodFat").value),
 carbs:Number($("foodCarbs").value)
 };
 
-if(!v.name||
-["kcal","protein","fat","carbs"].some(
+if(!v.name||["kcal","protein","fat","carbs"].some(
 k=>!Number.isFinite(v[k])||v[k]<0
 )){
 alert("Bitte gültige Nährwerte eingeben.");
@@ -1095,8 +928,7 @@ return;
 const pieceText=$("foodPiece").value.trim();
 const piece=pieceText?Number(pieceText):null;
 
-if(piece!==null&&
-(!Number.isFinite(piece)||piece<=0)){
+if(piece!==null&&(!Number.isFinite(piece)||piece<=0)){
 alert("Ungültiges Stückgewicht.");
 return;
 }
@@ -1110,23 +942,18 @@ foods=foods.map(x=>x.id===editingFood?f:x);
 foods.push(f);
 }
 
-if(piece){
-weights[id]=piece;
-}else{
-delete weights[id];
-}
+if(piece)weights[id]=piece;
+else delete weights[id];
 
 editingFood=null;
 $("foodForm").classList.add("hidden");
-
 save();
 render();
 selectFood(id);
 };
 
 $("deleteFood").onclick=()=>{
-if(!editingFood||
-!confirm("Lebensmittel löschen?"))return;
+if(!editingFood||!confirm("Lebensmittel löschen?"))return;
 
 foods=foods.filter(f=>f.id!==editingFood);
 delete weights[editingFood];
@@ -1138,7 +965,6 @@ $("selectionCard").classList.add("hidden");
 
 editingFood=null;
 $("foodForm").classList.add("hidden");
-
 save();
 render();
 };
@@ -1165,61 +991,245 @@ fat:Number($("goalFat").value),
 carbs:Number($("goalCarbs").value)
 };
 
-if(Object.values(next).some(
-v=>!Number.isFinite(v)||v<=0
-)){
+if(Object.values(next).some(v=>!Number.isFinite(v)||v<=0)){
 alert("Bitte gültige Ziele eingeben.");
 return;
 }
 
 goals=next;
 $("goalsForm").classList.add("hidden");
-
 save();
 render();
 };
 
-/* NEU: Nur manuell den heutigen Tag zurücksetzen */
+/* Manuelles Zurücksetzen */
 $("clearDay").onclick=()=>{
 const today=day();
+const count=entries.filter(e=>e.date===today).length;
 
-const todayEntries=entries.filter(
-e=>e.date===today
-);
-
-if(!todayEntries.length){
-alert("Die heutige Tagesbilanz ist bereits leer.");
+if(!count){
+alert("Die heutige Bilanz ist bereits leer.");
 return;
 }
 
-const message=
-`Möchtest du wirklich alle ${todayEntries.length} Einträge von heute löschen?\n\n`+
-"Frühere Tage, gespeicherte Mahlzeiten und Lebensmittel bleiben erhalten.";
-
-if(!confirm(message))return;
+if(!confirm(
+`Wirklich alle ${count} heutigen Einträge löschen? Frühere Tage bleiben erhalten.`
+))return;
 
 entries=entries.filter(e=>e.date!==today);
 selectedDay=today;
-
 save();
 render();
-
-alert("Die heutige Tagesbilanz wurde zurückgesetzt.");
+alert("Heutige Bilanz zurückgesetzt.");
 };
 
-/* Backup */
+/* Online-Lebensmittelsuche */
+function onlineValue(n,key){
+const v=n?.[key];
+return typeof v==="number"&&Number.isFinite(v)&&v>=0?v:null;
+}
+
+function onlineNutrition(p){
+const n=p.nutriments||{};
+let kcal=onlineValue(n,"energy-kcal_100g");
+
+if(kcal===null){
+const kj=onlineValue(n,"energy-kj_100g");
+if(kj!==null)kcal=kj/4.184;
+}
+
+return {
+kcal,
+protein:onlineValue(n,"proteins_100g"),
+fat:onlineValue(n,"fat_100g"),
+carbs:onlineValue(n,"carbohydrates_100g")
+};
+}
+
+function onlineProductName(p){
+return [p.product_name,p.brands].filter(Boolean).join(" · ")
+||"Produkt ohne Namen";
+}
+
+$("onlineForm").onsubmit=async e=>{
+e.preventDefault();
+
+const q=$("onlineQuery").value.trim();
+if(!q)return;
+
+$("onlineResults").replaceChildren();
+$("onlineEdit").classList.add("hidden");
+$("onlineStatus").textContent="Online-Suche läuft ...";
+$("onlineSearchButton").disabled=true;
+
+try{
+const params=new URLSearchParams({
+search_terms:q,
+search_simple:"1",
+action:"process",
+json:"1",
+page_size:"20",
+fields:"code,product_name,brands,nutriments"
+});
+
+const url="https://world.openfoodfacts.org/cgi/search.pl?"+
+params.toString();
+
+const response=await fetch(url,{
+headers:{Accept:"application/json"}
+});
+
+if(!response.ok)throw Error("HTTP "+response.status);
+
+const data=await response.json();
+
+const products=(data.products||[])
+.filter(p=>p.product_name&&
+Object.values(onlineNutrition(p)).some(v=>v!==null))
+.slice(0,12);
+
+$("onlineStatus").textContent=products.length
+?`${products.length} Produkte gefunden. Wähle das passende aus.`
+:"Keine passenden Produkte mit Nährwerten gefunden. Versuche einen anderen Suchbegriff.";
+
+for(const p of products){
+const t=onlineNutrition(p);
+const card=document.createElement("div");
+const name=document.createElement("strong");
+const small=document.createElement("small");
+
+card.className="online-result";
+name.textContent=onlineProductName(p);
+
+const display=v=>v===null?"?":fmt(v);
+
+small.textContent=
+`Pro 100 g: ${display(t.kcal)} kcal · `+
+`P ${display(t.protein)} g · `+
+`F ${display(t.fat)} g · `+
+`KH ${display(t.carbs)} g`;
+
+const choose=button("Werte prüfen und übernehmen",()=>{
+$("onlineName").value=onlineProductName(p);
+
+for(const [id,key] of [
+["onlineKcal","kcal"],
+["onlineProtein","protein"],
+["onlineFat","fat"],
+["onlineCarbs","carbs"]
+]){
+$(id).value=t[key]===null
+?""
+:Math.round(t[key]*100)/100;
+}
+
+$("onlineEdit").classList.remove("hidden");
+$("onlineEdit").scrollIntoView({
+behavior:"smooth",block:"nearest"
+});
+},"soft");
+
+card.append(name,small,choose);
+$("onlineResults").append(card);
+}
+
+}catch(err){
+$("onlineStatus").textContent=
+"Online-Suche momentan nicht erreichbar. Prüfe die Internetverbindung oder versuche es später. ("+
+err.message+")";
+}finally{
+$("onlineSearchButton").disabled=false;
+}
+};
+
+$("onlineCancel").onclick=()=>{
+$("onlineEdit").classList.add("hidden");
+};
+
+$("onlineSave").onclick=()=>{
+const name=$("onlineName").value.trim();
+const ids=[
+"onlineKcal","onlineProtein","onlineFat","onlineCarbs"
+];
+
+if(!name||ids.some(id=>$(id).value.trim()==="")){
+alert("Bitte alle vier Nährwerte prüfen und fehlende Angaben ergänzen.");
+return;
+}
+
+const vals=ids.map(id=>Number($(id).value));
+
+if(vals.some(v=>!Number.isFinite(v)||v<0)){
+alert("Bitte gültige Nährwerte eingeben.");
+return;
+}
+
+const f={
+id:uid(),
+name,
+kcal:vals[0],
+protein:vals[1],
+fat:vals[2],
+carbs:vals[3],
+piece:null
+};
+
+foods.push(f);
+save();
+render();
+$("onlineEdit").classList.add("hidden");
+
+alert(
+"Lebensmittel gespeichert! Du findest es jetzt unter „Lebensmittel auswählen“."
+);
+};
+
+/* Kalorien und Makros manuell hinzufügen */
+$("manualForm").onsubmit=e=>{
+e.preventDefault();
+
+const ids=[
+"manualKcal","manualProtein","manualFat","manualCarbs"
+];
+
+const values=ids.map(id=>
+$(id).value.trim()===""?0:Number($(id).value)
+);
+
+if(values.some(v=>!Number.isFinite(v)||v<0)){
+alert("Bitte nur gültige, nicht negative Zahlen eingeben.");
+return;
+}
+
+if(values.every(v=>v===0)){
+alert("Bitte mindestens einen Wert grösser als 0 eingeben.");
+return;
+}
+
+const name=$("manualName").value.trim()||"Manuelle Ergänzung";
+
+addEntry(name,0,"Manuell hinzugefügt",{
+kcal:values[0],
+protein:values[1],
+fat:values[2],
+carbs:values[3]
+});
+
+$("manualForm").reset();
+alert("Die Werte wurden zur heutigen Bilanz addiert.");
+};
+
+/* Datensicherung */
 $("exportData").onclick=()=>{
-const blob=new Blob([
-JSON.stringify({
+const data={
 version:2,
 created:new Date().toISOString(),
-foods,
-entries,
-goals,
-weights,
-meals
-},null,2)
-],{type:"application/json"});
+foods,entries,goals,weights,meals
+};
+
+const blob=new Blob([JSON.stringify(data,null,2)],{
+type:"application/json"
+});
 
 const url=URL.createObjectURL(blob);
 const a=document.createElement("a");
@@ -1242,13 +1252,11 @@ if(!file)return;
 try{
 const data=JSON.parse(await file.text());
 
-if(
-!Array.isArray(data.foods)||
+if(!Array.isArray(data.foods)||
 !Array.isArray(data.entries)||
 !data.goals||
 typeof data.goals!=="object"||
-(data.meals!==undefined&&!Array.isArray(data.meals))
-){
+(data.meals!==undefined&&!Array.isArray(data.meals))){
 throw Error("Ungültige Backup-Datei");
 }
 
@@ -1260,7 +1268,6 @@ foods=data.foods;
 entries=data.entries;
 
 const g=data.goals;
-
 goals={
 kcal:num(g.kcal)||2000,
 protein:num(g.protein)||170,
@@ -1268,8 +1275,7 @@ fat:num(g.fat??g.fett)||55,
 carbs:num(g.carbs??g.kh)||180
 };
 
-weights=data.weights&&
-typeof data.weights==="object"
+weights=data.weights&&typeof data.weights==="object"
 ?data.weights:{};
 
 meals=data.meals||[];
@@ -1286,7 +1292,6 @@ $("mealEditor").classList.add("hidden");
 
 save();
 render();
-
 alert("Backup erfolgreich importiert.");
 
 }catch(err){
@@ -1296,20 +1301,16 @@ e.target.value="";
 }
 };
 
-/* Mitternacht erkennen, auch wenn die App offen bleibt */
+/* Neuen Kalendertag erkennen */
 let lastKnownDay=day();
 
 function checkDayChange(){
 const now=day();
 
 if(now!==lastKnownDay){
-const wasShowingToday=selectedDay===lastKnownDay;
+const wasToday=selectedDay===lastKnownDay;
 lastKnownDay=now;
-
-if(wasShowingToday){
-selectedDay=now;
-}
-
+if(wasToday)selectedDay=now;
 render();
 }
 }
@@ -1320,7 +1321,7 @@ if(!document.hidden)checkDayChange();
 
 window.addEventListener("focus",checkDayChange);
 
-/* Start */
+/* App starten */
 render();
 
 </script>
